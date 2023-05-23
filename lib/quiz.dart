@@ -3,6 +3,7 @@ import 'package:quiz_app/data/questions.dart';
 
 import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/start_screen.dart';
+import 'package:quiz_app/result_screen.dart';
 
 const startAlignment = Alignment.topLeft;
 const endAlignment = Alignment.bottomRight;
@@ -31,8 +32,7 @@ class _QuizState extends State<Quiz> {
 
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = 'start-screen';
-        selectedAnswers = [];
+        activeScreen = 'result-screen';
       });
     }
   }
@@ -50,7 +50,9 @@ class _QuizState extends State<Quiz> {
           ),
           child: activeScreen == 'start-screen'
               ? StartScreen(switchScreen)
-              : QuestionsScreen(chooseAnswer),
+              : activeScreen == 'result-screen'
+                  ? ResultsScreen(selectedAnswers)
+                  : QuestionsScreen(chooseAnswer),
         ),
       ),
     );
